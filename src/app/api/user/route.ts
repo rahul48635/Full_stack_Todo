@@ -10,9 +10,9 @@ export async function POST(req: NextRequest) {
   try{
     if(await prisma.user.findUnique({
       where: {
-        email:username,
+        email:username.toLowerCase(),
         password:password,
-        username:username
+        username:username.toLowerCase()
       },
     })){
       return NextResponse.json({
@@ -21,9 +21,9 @@ export async function POST(req: NextRequest) {
     }
     await prisma.user.create({
       data: {
-        email:username,
+        email:username.toLowerCase(),
         password:password,
-        username:username
+        username:username.toLowerCase()
       },
     });
   }catch(e){
